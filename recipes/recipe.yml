@@ -4,7 +4,7 @@ name: rhizome-blue
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/aurora-dx
+base-image: ghcr.io/ublue-os/vauxite-main
 image-version: 40 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -18,14 +18,210 @@ modules:
   - type: rpm-ostree
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+      - rpmfusion-free-release
+      - rpmfusion-nonfree-release
+      - https://download.docker.com/linux/fedora/docker-ce.repo
     install:
       # - micro
       # - starship
+            # Build and run containers
+      - distrobox # run any os in containers easily
+      - podman-compose # Use docker.compose.yml files with podman
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+
+      # Deps
+      - python3-tkinter
+      - python3-wxpython4
+
+      
+      # system-level utilities
+      - xbindkeys # Shortcuts
+      - rclone
+      - rclone-browser
+      - ulauncher
+      - input-leap
+          
+      # Run VMs
+      - libvirt
+      - qemu
+      - virt-manager
+
+      # misc
+      - xsel
+      - firewalld
+      - igt-gpu-tools # To check GPU usage via sudo intel_gpu_top
+      - intel-media-driver # Hardware acceleration with Intel (c.f. https://wiki.archlinux.org/title/Hardware_video_acceleration)
+      - mozilla-openh264 # Video support on Firefox
+      - usbguard # Protect against unknown USB devices, already in secureblue
+      - usbguard-notifier
+
+      # Icons and themes:
+      - mint-x-icons
+      - mint-y-icons
+      - material-icons-fonts
+      - elementary-xfce-icon-theme
+      - breeze-icon-theme
+      - oxygen-icon-theme
+      - adwaita-icon-theme
+      - highcontrast-icon-theme
+      - faience-icon-theme
+      - moka-icon-theme
+      - mate-icon-theme
+      - candy-icon-theme
+      - deepin-icon-theme
+      - elementary-icon-theme
+      - gnome-colors-icon-theme
+      - hicolor-icon-theme
+      - luv-icon-theme
+      - lxde-icon-theme
+      - numix-icon-theme
+      - paper-icon-theme
+      - suru-icon-theme
+      - papirus-icon-theme
+      - tango-icon-theme
+      - tango-icon-theme-extras
+      - flat-remix-icon-theme
+      - numix-icon-theme-circle
+      - numix-icon-theme-square
+      - tango-icon-theme-extras
+      - cosmic-icon-theme
+      - We10X-icon-theme
+      - epapirus-icon-theme
+      - mate-icon-theme
+
+      # Fonts
+      - fontawesome-6-brands-fonts
+      - fontawesome4-fonts
+      - default-fonts
+
+      # wallpapers
+      - deepin-wallpapers
+      - sway-wallpapers
+      - kde-wallpapers
+      - f21-backgrounds
+      - f22-backgrounds
+      - f23-backgrounds
+      - f24-backgrounds
+      - f25-backgrounds
+      - f26-backgrounds
+      - f27-backgrounds
+      - f28-backgrounds
+      - f29-backgrounds
+      - f30-backgrounds
+      - f31-backgrounds
+      - f32-backgrounds
+      - f33-backgrounds
+      - f34-backgrounds
+      - f35-backgrounds
+      - f36-backgrounds
+      - f37-backgrounds
+      - f38-backgrounds
+      - f39-backgrounds
+      - f40-backgrounds
+      - f41-backgrounds
+      - f21-backgrounds-xfce
+      - f22-backgrounds-xfce
+      - f23-backgrounds-xfce
+      - f24-backgrounds-xfce
+      - f25-backgrounds-xfce
+      - f26-backgrounds-xfce
+      - f27-backgrounds-xfce
+      - f28-backgrounds-xfce
+      - f29-backgrounds-xfce
+      - f30-backgrounds-xfce
+      - f31-backgrounds-xfce
+      - f32-backgrounds-xfce
+      - f33-backgrounds-xfce
+      - f34-backgrounds-xfce
+      - f35-backgrounds-xfce
+      - f36-backgrounds-xfce
+      - f37-backgrounds-xfce
+      - f38-backgrounds-xfce
+      - f39-backgrounds-xfce
+      - f40-backgrounds-xfce
+      - f41-backgrounds-xfce
+      - f21-backgrounds-extra-kde
+      - f22-backgrounds-extras-kde
+      - f23-backgrounds-extra-kde
+      - f24-backgrounds-extras-kde
+      - f25-backgrounds-extra-kde
+      - f26-backgrounds-extras-kde
+      - f27-backgrounds-extra-kde
+      - f28-backgrounds-extras-kde
+      - f29-backgrounds-extra-kde
+      - f30-backgrounds-extras-kde
+      - f31-backgrounds-extras-kde
+      - f32-backgrounds-extras-kde
+      - f33-backgrounds-extras-kde
+      - f34-backgrounds-extra-kde
+      - f35-backgrounds-extra-kde
+      - f36-backgrounds-extra-kde
+      - f37-backgrounds-extra-kde
+      - f38-backgrounds-extra-kde
+      - f39-backgrounds-extra-kde
+      - f40-backgrounds-extra-kde
+      - arc-kde-wallpapers
+      - constantine-backgrounds-kde
+      - goddard-backgrounds-gnome
+      - heisenbug-backgrounds-kde
+      - laughlin-backgrounds-gnome
+      - lovelock-backgrounds-gnome
+      - materia-kde-wallpapers
+      - verne-backgrounds-gnome
+      - plasma-workspace-wallpapers
+      - f41-backgrounds-budgie
+      - mate-backgrounds
+      - budgie-backgrounds
+      - constantine-backgrounds
+      - fedorainfinity-backgrounds
+      - gnome-backgrounds
+      - goddard-backgrounds
+      - heisenbug-backgrounds
+      - laughlin-backgrounds
+      - lovelock-backgrounds
+      - neon-backgrounds
+      - solar-backgrounds
+      - verne-backgrounds
+      - desktop-backgrounds-basic
+      - fedora-jam-backgrounds
+      - fedora-workstation-backgrounds
+      - schroedinger-cat-backgrounds
+      - spherical-cow-backgrounds
+      - xenlism-wildfire-backgrounds
+
+      # Docks
+      - plank
+      # - arc-theme-plank
+      # - cairo-dock
+      # - deepin-dock
+      # - latte-dock
+      # - wmdocker
+
+      # Cursors
+      - breeze-cursor-theme
+      - oxygen-cursor-themes
+      - adwaita-cursor-theme
+      - oneko
+      - xbanish
+
+      # Themes
+      - arc-theme
+      - yaru-theme
+      - mint-y-theme
+      - bluebird-metacity-theme
+      - emacs-color-theme
+      - flat-remix-theme
+      - greybird-dark-theme
+      - adwaita-blue-gtk-theme
+      
     remove:
-      # example: removing firefox (in favor of the flatpak)
-      # "firefox" is the main package, "firefox-langpacks" is a dependency
-      # - firefox
-      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+      - firefox
+      - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+      - nvtop
+      - noopenh264 # Pointless for now in Fedora 40: https://discussion.fedoraproject.org/t/h264-video-playback-in-firefox-in-f40/111872
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
@@ -35,6 +231,47 @@ modules:
       repo-name: flathub
       repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
+        # Browsers
+        - io.github.zen_browser.zen
+        - com.brave.Browser
+        - net.mullvad.MullvadBrowser
+        # Office
+        - org.libreoffice.LibreOffice
+        - org.onlyoffice.desktopeditors
+        - md.obsidian.Obsidian
+        - org.zotero.Zotero
+        # - Media
+        - org.videolan.VLC
+        - net.sapples.LiveCaptions
+        - org.inkscape.Inkscape
+        # Network
+        - com.protonvpn.www
+        - org.gnome.World.PikaBackup
+        - org.mozilla.Thunderbird
+        # Science
+        - org.octave.Octave
+        - io.github.Qalculate
+        - se.sjoerd.Graphs
+        - org.scilab.Scilab
+        - org.gnumeric.Gnumeric
+        - org.openchemistry.Avogadro2
+        - org.kde.labplot2
+        - net.sourceforge.scidavis
+        - org.squey.Squey
+        - org.texmacs.TeXmacs
+        - de.marlam.gencolormap
+        # Development and containerization
+        - org.fedoraproject.MediaWriter
+        - io.podman_desktop.PodmanDesktop
+        - io.github.dvlv.boxbuddyrs
+        # Utilities
+        - io.github.flattool.Warehouse
+        - com.github.tchx84.Flatseal
+        - it.mijorus.gearlever
+        - io.github.peazip.PeaZip
+        - io.github.pwr_solaar.solaar
+        - com.github.ADBeveridge.Raider
+        - garden.jamie.Morphosisleap
         - md.obsidian.Obsidian
         - org.libreoffice.LibreOffice
         - org.onlyoffice.desktopeditors
@@ -46,22 +283,52 @@ modules:
         - org.zotero.Zotero
         - io.github.peazip.PeaZip
         - me.proton.Pass
-        
-      remove:
-        - org.gnome.eog
-        - org.mozilla.Thunderbird
-        - org.mozilla.firefox
-        - org.kde.kcalc
-        - org.kde.gwenview
-        - org.kde.kontact
-        - org.kde.okular
-        - org.kde.kweather
-        - org.kde.kclock
-        - org.fkoehler.KTailctl
-        - org.kde.haruna
-        - org.fedoraproject.MediaWriter
-        - io.missioncenter.MissionCenter
-        - org.gnome.DejaDup
-        
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - FiraCode
+        - Hack
+        - SourceCodePro
+        - Terminus
+        - JetBrainsMono
+        - NerdFontsSymbolsOnly
+      google-fonts:
+        - Roboto
+        - Open Sans
+
+  - type: brew
+    brew-analytics: false
+    auto-update: true
+    auto-upgrade: true
+    nofile-limits: true
+
+  - type: systemd
+    # this example disables automatic flatpak updates and enables a custom service unit for all users
+    system:
+      disabled:
+        - flatpak-system-update.timer
+      enabled:
+        - docker.service
+        - docker.socket
+        - libvirtd.service
+        - smb.service
+        - usbguard-notifier.service
+
+  - type: script
+    snippets:
+      # Avoid error when runnning sudo systemctl start usbguard.service
+      # Original error: "AuditFileSink: /var/log/usbguard/usbguard-audit.log: failed to open"
+      # TAKEN CARE OF BY FILES MODULE
+      #- "mkdir -p /var/log/usbguard/"
+      #- "touch /var/log/usbguard/usbguard-audit.log"
+      # Make all users in usbguardgroup be able to use usbguard-notifier (listen), list rules (list) and modify them (modify), i.e. have ALL privileges
+      # This rule is stored in /etc/usbguard/IPCAccessControl.d/:usbguardgroup
+      # By default, only user root and group wheel are allowed (c.f. /etc/usbguard/usbguard-daemon.conf) everything
+      # man 5 usbguard-daemon.conf says this is generally usable and reasonably safe
+      - "groupadd --gid 10000 usbguardgroup"
+      - "usbguard add-user --group usbguardgroup --devices ALL --policy list --exceptions listen"
+
+  
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
